@@ -16,8 +16,11 @@
       <!-- <router-view /> -->
 
       <h4>Login / Registration</h4>
-      <input type="text" placeholder="search your movie" />
-      <input type="submit" />
+      <div class="search">
+        <input type="text" placeholder="search your movie" />
+        <input type="submit" />
+      </div>
+
       <br />
       <br />
       <div class="links">
@@ -25,8 +28,8 @@
         <a href="/top">Top movies</a>
       </div>
       <p>
-        Home / Top movies /////////////// Sorting by -Year / Genres / Ratings /
-        Reviews / Votes
+        //////////////////////////////////////////////// Sorting by -Year /
+        Genres / Ratings / Reviews / Votes
       </p>
 
       <MovieList v-bind:movies="movies" />
@@ -71,6 +74,14 @@ export default {
 }
 
 h1 {
+  text-align: center;
+}
+
+h4 {
+  text-align: end;
+}
+
+.search {
   text-align: center;
 }
 
