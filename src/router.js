@@ -25,7 +25,8 @@
 
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "./views/Home.vue";
-import TopMovies from "./views/TopMovies.vue";
+import TopMovies from "@/views/TopMovies.vue";
+import MovieCard from "./views/MovieCard.vue";
 // import Home from "@/views/Home";
 const routes = [
   {
@@ -38,6 +39,12 @@ const routes = [
     path: "/top",
     name: "top",
     component: TopMovies,
+  },
+  {
+    path: "/:id",
+    name: "movieCard",
+    component: MovieCard,
+    props: true,
   },
 ];
 

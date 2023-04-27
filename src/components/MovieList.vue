@@ -1,18 +1,7 @@
 <template>
   <div class="card">
     <ul>
-      <!-- <li v-for="movie in movies"> -->
       <Movie v-bind:movies="movies" />
-      <!-- <img v-bind:src="movie.poster" alt="single poster" />
-        <div class="container">
-          <h4>
-            <b> {{ movie.title }}</b>
-          </h4>
-          <p>{{ movie.rating }}</p>
-        </div> -->
-      <!-- </li> -->
-      <!-- <li v-for="movie in movies">{{ movie.title }}</li> -->
-      <!-- <li>List number 1</li> -->
     </ul>
   </div>
 </template>
@@ -46,9 +35,9 @@ export default {
 }
 
 /* Add some padding inside the card container */
-.container {
+/* .container {
   padding: 2px 16px;
-}
+} */
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);

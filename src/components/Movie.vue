@@ -1,12 +1,17 @@
 <template>
   <li v-for="movie in movies" :key="movie._id">
-    <img v-bind:src="movie.poster" alt="single poster" />
-    <div class="container">
-      <h4>
-        <b> {{ movie.title }}</b>
-      </h4>
-      <p>{{ movie.rating }}</p>
-    </div>
+    <!-- name: 'movieCard' - linking component to this router link -->
+    <!-- params: { id: movie._id } -adding id to our url route / path / end point -->
+    <!-- params: { id: movie._id } - passing id as a key with value movie._id to our router.js -->
+    <router-link :to="{ name: 'movieCard', params: { id: movie._id } }">
+      <div class="container">
+        <img v-bind:src="movie.poster" alt="single poster" @click="Check" />
+        <h4>
+          {{ movie.title }}
+        </h4>
+        <p>{{ movie.rating }}</p>
+      </div>
+    </router-link>
   </li>
 </template>
 
@@ -22,6 +27,11 @@ export default {
   //     image: ''
   //   };
   // },
+  methods: {
+    Check(e) {
+      console.log(e);
+    },
+  },
 };
 </script>
 
@@ -30,6 +40,7 @@ export default {
 img {
   border-radius: 5px 5px 0 0;
   width: 300px;
+  height: 450px;
 }
 
 li {
@@ -37,6 +48,13 @@ li {
 }
 
 .container {
+  text-align: center;
+  /* justify-content: center; */
+  background-color: black;
+  border-radius: 5px;
+}
+
+.myTitle {
   text-align: center;
 }
 </style>

@@ -11,26 +11,46 @@
 <template>
   <div>
     <div class="post">
-      <h1>Best Movies</h1>
-      <hr />
+      <!-- <h1>Best Movies</h1> -->
+
       <!-- <router-view /> -->
 
-      <h4>Login / Registration</h4>
-      <div class="search">
+      <!-- <div class="search">
         <input type="text" placeholder="search your movie" />
         <input type="submit" />
-      </div>
+      </div> -->
 
       <br />
       <br />
-      <div class="links">
-        <a href="/">Home</a>
-        <a href="/top">Top movies</a>
+      <!-- <div class="links">
+        <router-link to="/">Home</router-link>
+        <router-link to="/top">Top movies</router-link>
+      </div> -->
+      <div class="sort-search-bar">
+        <div>
+          <label>Sort By: </label>
+          <select onChange="{handleChange}">
+            <option></option>
+            <option value="rating">rating</option>
+            <option value="rating">year</option>
+            <option value="genres">genres</option>
+            <option value="duration">duration</option>
+            <option value="reviews">reviews</option>
+            <option value="votes">votes</option>
+          </select>
+
+          <span> Order: </span>
+          <select onChange="{handleOrder}">
+            <option value="asc">ascending</option>
+            <option value="desc">descending</option>
+          </select>
+        </div>
+
+        <div class="search">
+          <input type="text" placeholder="search your movie" />
+          <input type="submit" />
+        </div>
       </div>
-      <p>
-        //////////////////////////////////////////////// Sorting by -Year /
-        Genres / Ratings / Reviews / Votes
-      </p>
 
       <MovieList v-bind:movies="movies" />
     </div>
@@ -69,7 +89,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* text-align: center; */
-  color: #2c3e50;
+  /* color: #2c3e50; */
   margin-top: 60px;
 }
 
@@ -82,10 +102,26 @@ h4 {
 }
 
 .search {
-  text-align: center;
+  /* text-align: center; */
+  margin-right: 80px;
 }
 
 .links a {
   margin-right: 20px;
+  color: beige;
+}
+
+links {
+  color: beige;
+}
+
+span {
+  margin-left: 10px;
+}
+
+.sort-search-bar {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 50px;
 }
 </style>

@@ -68,7 +68,64 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
+  <!-- all content before and after RoterView -will show on every single page -->
+  <div class="nav-container">
+    <div class="links">
+      <h1>Best Movies.</h1>
+      <div id="nav">
+        <router-link to="/">Home</router-link>
+        <!--will link the same component
+           <router-link :to="{ name:'home'}">Home</router-link> -->
+        <router-link to="/top">Top movies</router-link>
+      </div>
+      <div class="login">
+        <h4>Login / Registration</h4>
+      </div>
+    </div>
+
+    <hr />
+    <hr />
+  </div>
+  <!-- RouterView - here our router components will be dinamicly injected, depending on the rout we visit
+    will render different components on the page -->
   <main>
     <RouterView />
   </main>
 </template>
+
+<style>
+body {
+  background-color: #33323a;
+  /* background-color: #abced8; */
+  color: beige;
+}
+
+#nav {
+  padding: 10px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+#nav a {
+  font-weight: bold;
+  color: white;
+  /* text-decoration - remove underline from nav words; */
+  text-decoration: none;
+  padding: 10px;
+}
+
+/* .nav-container {
+  display: flex; 
+  justify-content: flex-end;
+} */
+
+.login {
+  margin-top: -60px;
+  margin-right: 50px;
+}
+
+/* active nav bar color */
+#nav a.router-link-exact-active {
+  color: aquamarine;
+}
+</style>
