@@ -77,11 +77,14 @@ import { RouterView } from "vue-router";
         <!--will link the same component
            <router-link :to="{ name:'home'}">Home</router-link> -->
         <router-link to="/top">Top movies</router-link>
+        <router-link to="/favorites">Favorite movies</router-link>
+        <router-link to="/enquiries">Enquiries</router-link>
       </div>
-      <div class="login">
-        <h4>Login / Registration</h4>
-      </div>
+      <!-- <div class="login">
+        <button @click="hadleLogin()">Login / Registration</button>
+      </div> -->
     </div>
+    <!-- <br /> -->
 
     <hr />
     <hr />
@@ -92,6 +95,22 @@ import { RouterView } from "vue-router";
     <RouterView />
   </main>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      // login: false,
+    };
+  },
+  // methods: {
+  //   hadleLogin() {
+  //     this.login = true;
+  //     console.log(this.login);
+  //   },
+  // },
+};
+</script>
 
 <style>
 body {
@@ -104,12 +123,13 @@ body {
   padding: 10px;
   display: flex;
   justify-content: flex-start;
+  margin-bottom: 20px;
 }
 
 #nav a {
   font-weight: bold;
   color: white;
-  /* text-decoration - remove underline from nav words; */
+  /* text-decoration:none - remove underline from nav words; */
   text-decoration: none;
   padding: 10px;
 }

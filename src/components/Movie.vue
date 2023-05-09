@@ -5,7 +5,8 @@
     <!-- params: { id: movie._id } - passing id as a key with value movie._id to our router.js -->
     <router-link :to="{ name: 'movieCard', params: { id: movie._id } }">
       <div class="container">
-        <img v-bind:src="movie.poster" alt="single poster" @click="Check" />
+        <img v-bind:src="movie.poster" alt="single poster" />
+
         <h4>
           {{ movie.title }}
         </h4>
@@ -27,9 +28,10 @@ export default {
   //     image: ''
   //   };
   // },
-  methods: {
-    Check(e) {
-      console.log(e);
+  methods: {},
+  computed: {
+    ratingSort() {
+      return movies.sort((movie) => movie.rating - movie.rating);
     },
   },
 };
@@ -45,16 +47,24 @@ img {
 
 li {
   margin-right: 6px;
+  margin-bottom: 10px;
 }
 
 .container {
-  text-align: center;
+  /* text-align: center; */
   /* justify-content: center; */
-  background-color: black;
+  /* background-color: black; */
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 5px;
 }
 
-.myTitle {
+/* .container-info {
+  display: flex;
+  justify-content: space-around;
+} */
+
+.container h4 {
   text-align: center;
+  margin: 0;
 }
 </style>

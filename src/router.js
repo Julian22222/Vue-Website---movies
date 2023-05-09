@@ -27,6 +27,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import Home from "./views/Home.vue";
 import TopMovies from "@/views/TopMovies.vue";
 import MovieCard from "./views/MovieCard.vue";
+import Favorites from "./views/Favorites.vue";
+import Enquiries from "./views/Enquiries.vue";
 // import Home from "@/views/Home";
 const routes = [
   {
@@ -39,6 +41,16 @@ const routes = [
     path: "/top",
     name: "top",
     component: TopMovies,
+  },
+  {
+    path: "/favorites",
+    name: "favorites",
+    component: Favorites,
+  },
+  {
+    path: "/enquiries",
+    name: "enquiries",
+    component: Enquiries,
   },
   {
     path: "/:id",
