@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="card">
     <div class="title-container">
       <div>
         <h2>{{ card.title }}</h2>
@@ -26,7 +26,6 @@
           {{ genre }}
         </div>
 
-        <!-- <p>{{ card.genres }}</p> -->
         <p>Duration: {{ card.duration }}</p>
         <p>Duration: {{ showMinutes() }}</p>
         <p>Votes: {{ card.votes }}</p>
@@ -91,6 +90,10 @@
       </div>
     </div>
   </div>
+  <div v-else>
+    <p style="color: beige">Loading movies ...</p>
+  </div>
+  {{ favoriteList }}
 </template>
 
 <script>
@@ -111,16 +114,19 @@ export default {
       text: "",
       genresList: "",
       hey: "card.trailer",
+      favoriteList: [],
     };
   },
   /////////////////////////////
   mounted() {
     // fetch("https://jsonplaceholder.tyicode.com/todos?_limit=3")
+    // fetch('http://localhost:8080/movies/' + this.id)
     fetch(`http://localhost:8080/movies/${this.$route.params.id}`)
       .then((res) => res.json())
       .then((data) => {
         this.card = data;
-      });
+      })
+      .catch((err) => console.log(err.message));
   },
   methods: {
     // inside methods always use this. to access the data variables - this.card
@@ -145,8 +151,15 @@ export default {
       //   this.card.review.text.push(this.$refs.commentText.value);
     },
     addToFavorites(e) {
-      console.log(e.target.baseURI);
-      console.log(e.target);
+      // console.log(e.target.baseURI);
+      ///////////////////
+      // get the movie id from URl
+      // console.log(e.target.baseURI.split("").slice(22).join(""));
+
+      // console.log(e.target);
+      if (!this.favoriteList.includes(this.card)) {
+        this.favoriteList.push(this.card);
+      }
     },
   },
   //   components: { MovieList },

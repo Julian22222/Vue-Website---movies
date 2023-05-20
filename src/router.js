@@ -1,34 +1,10 @@
-// import Vue from "vue";
-// import { createRouter, createWebHistory } from "vue-router";
-// import Home from "./views/Home.vue";
-// import TopMovies from "./views/TopMovies.vue";
-// // import Home from "@/views/Home";
-// const router = createRouter({
-//   history: createWebHistory(import.meta.env.BASE_URL),
-//   routes: [
-//     {
-//       path: "/",
-//       name: "home",
-//       //   when we on "/" we will render Home component
-//       component: Home,
-//     },
-//     {
-//       path: "/top",
-//       name: "top",
-//       component: TopMovies,
-//     },
-//   ],
-// });
-
-// export default router;
-/////////////////////////////////////////////////////////////////////
-
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "./views/Home.vue";
 import TopMovies from "@/views/TopMovies.vue";
 import MovieCard from "./views/MovieCard.vue";
 import Favorites from "./views/Favorites.vue";
 import Enquiries from "./views/Enquiries.vue";
+import NotFound from "./views/NotFound.vue";
 // import Home from "@/views/Home";
 const routes = [
   {
@@ -57,6 +33,17 @@ const routes = [
     name: "movieCard",
     component: MovieCard,
     props: true,
+  },
+  //redirects
+  // {
+  //   path: "home",
+  //   redirect: "/",
+  // },
+  //catch all 404
+  {
+    path: "/:catchAll(.*)",
+    name: "NotFound",
+    component: NotFound,
   },
 ];
 

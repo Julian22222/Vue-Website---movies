@@ -1,7 +1,8 @@
-const { defineConfig } = require("@vue/cli-service");
+// const { defineConfig } = require("@vue/cli-service");
 module.exports = defineConfig({
-  transpileDependencies: true,
-  devServer: {
-    proxy: "https://movies-ypff.onrender.com",
-  },
+  publicPath: "/list-with-products/",
+  // transpileDependencies: true,
+  // devServer: {
+  //   proxy: "https://movies-ypff.onrender.com",
+  // },
 });

@@ -1,12 +1,11 @@
 <template>
-  <li v-for="movie in movies" :key="movie._id">
+  <li v-for="movie in searchMovie" :key="movie._id">
     <!-- name: 'movieCard' - linking component to this router link -->
     <!-- params: { id: movie._id } -adding id to our url route / path / end point -->
     <!-- params: { id: movie._id } - passing id as a key with value movie._id to our router.js -->
     <router-link :to="{ name: 'movieCard', params: { id: movie._id } }">
       <div class="container">
         <img v-bind:src="movie.poster" alt="single poster" />
-
         <h4>
           {{ movie.title }}
         </h4>
@@ -14,24 +13,47 @@
       </div>
     </router-link>
   </li>
+  {{ search }}
 </template>
 
 <script>
 export default {
   // props: ["movieList"] - unpacking props from App.vue to use them in this component
-  props: ["movies"],
-  components: {
-    // TodoItem,
-  },
+  props: ["movies", "search"],
+  components: {},
   // data() {
   //   return {
   //     image: ''
   //   };
   // },
   methods: {},
+  updated() {
+    // const searchMovie = () => {
+    //   return this.movies.filter((element) => {
+    //     element.title.toLowerCase().includes(this.search.trim().toLowerCase());
+    //   });
+    // };
+    //  if (this.search.trim().length > 0) {
+    //       return this.movies.filter((element) => {
+    //         element.title
+    //           .toLowerCase()
+    //           .includes(this.search.trim().toLowerCase());
+    //       });
+    //     }
+  },
   computed: {
-    ratingSort() {
-      return movies.sort((movie) => movie.rating - movie.rating);
+    // ratingSort() {
+    //   return movies.sort((movie) => movie.rating - movie.rating);
+    // },
+    searchMovie() {
+      if (this.search.trim().length > 0) {
+        return this.movies.filter((element) => {
+          element.title
+            .toLowerCase()
+            .includes(this.search.trim().toLowerCase());
+        });
+      }
+      return this.movies;
     },
   },
 };

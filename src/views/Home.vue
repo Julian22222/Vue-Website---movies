@@ -2,6 +2,9 @@
   <div v-if="login">
     <LoginRegister @close="hadleLogin()" @closeBtn="handleCloseBtn" />
   </div>
+  <div v-if="genreShow">
+    <Genres @check="handleGenreBtn()" />
+  </div>
   <div>
     <div class="login">
       <button @click="hadleLogin()">Login / Registration</button>
@@ -11,7 +14,23 @@
       <br />
 
       <div class="sort-search-bar">
-        <button class="genresBtn">Genres</button>
+        <div class="genresBtn">
+          <label>Genres: </label>
+          <select v-model="genre">
+            <option></option>
+            <option value="crime">Crime</option>
+            <option value="drama">Drama</option>
+            <option value="romance">Romance</option>
+            <option value="biography">Biography</option>
+            <option value="mystery">Mystery</option>
+            <option value="adventure">Adventure</option>
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="fantasy">Fantasy</option>
+          </select>
+        </div>
+
+        <!-- <button class="genresBtn" @click="handleGenre">Genres</button> -->
         <!-- press btn ->open a popup window to choose a genres, than will give you a
         films with that genre -->
 
@@ -44,10 +63,9 @@
         </div>
       </div>
 
-      <MovieList v-bind:movies="movies" />
+      <MovieList v-bind:movies="movies" v-bind:search="search" />
     </div>
   </div>
-  {{ search }}
 </template>
 
 <script>
@@ -56,6 +74,7 @@
 // import new component in here
 import MovieList from "@/components/MovieList";
 import LoginRegister from "@/components/Login-Register.vue";
+import Genres from "@/components/Genres.vue";
 
 export default {
   name: "App",
@@ -70,6 +89,7 @@ export default {
       sort: "",
       order: "desc",
       search: "",
+      genre: "",
     };
   },
   mounted() {
@@ -77,7 +97,8 @@ export default {
       .then((res) => res.json())
       .then((data) => {
         this.movies = data;
-      });
+      })
+      .catch((err) => console.error(err.message));
   },
   updated() {
     ////////////////////////sort by RATING
@@ -143,12 +164,26 @@ export default {
         if (a.votes > b.votes) return 1;
       });
     }
+    /////////////////////Genres
+    // if (this.genre === "crime") {
+    //   this.movies.genres.filter((movie) => {
+    //     movie === "crime";
+    //   });
+    // }
     ////////////////////// SEARCH MOVIE
-    if (this.search === this.$refs.search.value) {
-      this.movies.filter((e) => {
-        e.title === this.$refs.search.value;
-      });
-    }
+
+    // if (this.search.trim().length > 0) {
+    //   return this.movies.filter((element) => {
+    //     element.title.toLowerCase().includes(this.search.trim().toLowerCase());
+    //   });
+    // }
+  },
+  computed: {
+    // searchMovie() {
+    //   this.movies.filter((name) => {
+    //     return name.title.includes(this.search);
+    //   });
+    // },
   },
   methods: {
     handleClick() {
@@ -165,9 +200,15 @@ export default {
       // reverses the variable - if it is false -it will turn true, and other way round
       this.login = !this.login;
     },
+
+    handleGenreBtn() {
+      // show all movies of this genre
+      this.genreShow = false;
+    },
   },
+
   //   components:{} need to register imported component in this component
-  components: { MovieList, LoginRegister },
+  components: { MovieList, LoginRegister, Genres },
 };
 </script>
 

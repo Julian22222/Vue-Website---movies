@@ -29,30 +29,17 @@ export default {
       movies: [],
     };
   },
-  methods: {
-    topMovies() {
-      this.movies = this.movies.filter((element) => {
-        return element.rating > 9;
-      });
-      //   this.movies.filter((element) => {
-      //     // Number(element.rating);
-      //     Number(element.rating) > 9;
-      //   });
-    },
-  },
-  computed: {
-    // topMovies() {
-    //   this.movies.filter((element) => {
-    //     element.rating > 9;
-    //   });
-    // },
-  },
+  methods: {},
+  computed: {},
   mounted() {
     fetch("http://localhost:8080/movies")
       .then((res) => res.json())
       .then((data) => {
-        this.movies = data;
-      });
+        this.movies = data.filter((element) => {
+          return element.rating >= 9;
+        });
+      })
+      .catch((err) => console.log(err.message));
   },
 };
 </script>

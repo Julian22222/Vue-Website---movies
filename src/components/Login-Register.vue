@@ -130,10 +130,12 @@ export default {
 }
 
 .eachBtn {
-  border: none;
+  border: black;
   background: none;
   font-size: 16px;
   font-weight: bold;
+  border-radius: 4px;
+  padding: 8px 15px;
 }
 
 .name {
