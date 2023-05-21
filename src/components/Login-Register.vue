@@ -67,8 +67,6 @@
     </div>
   </div>
   <br />
-  <hr />
-  {{ login }}
 </template>
 
 <script>
