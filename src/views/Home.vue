@@ -73,7 +73,8 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost:8082/movies")
+    fetch("https://movies-ypff.onrender.com/movies")
+      // fetch("http://localhost:8082/movies")
       .then((res) => res.json())
       .then((data) => {
         this.movies = data;
