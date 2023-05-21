@@ -1,13 +1,10 @@
 {
-  "homepage": "http://Julian22222.github.io/Vue-Website---movies",
   "name": "vue-movies-website",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "build": "vue-cli-service build"
   },
   "dependencies": {
     "core-js": "^3.8.3",

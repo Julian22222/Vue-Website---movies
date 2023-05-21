@@ -116,7 +116,7 @@ export default {
   /////////////////////////////
   mounted() {
     // fetch("https://jsonplaceholder.tyicode.com/todos?_limit=3")
-    fetch(`http://localhost:8080/movies/${this.$route.params.id}`)
+    fetch(`http://localhost:8082/movies/${this.$route.params.id}`)
       .then((res) => res.json())
       .then((data) => {
         this.card = data;
