@@ -41,7 +41,7 @@ export default {
 /* Add rounded corners to the top left and the top right corner of the image */
 img {
   border-radius: 5px 5px 0 0;
-  width: 300px;
+  width: 250px;
   height: 450px;
 }
 
