@@ -8,7 +8,7 @@ import NotFound from "./views/NotFound.vue";
 // import Home from "@/views/Home";
 const routes = [
   {
-    path: "/",
+    path: "/Vue-Website---movies/",
     name: "home",
     //   when we on "/" we will render Home component
     component: Home,
