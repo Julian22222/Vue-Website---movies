@@ -93,7 +93,7 @@ export default {
     };
   },
   mounted() {
-    fetch("http://localhost:8080/movies")
+    fetch("http://localhost:8081/movies")
       .then((res) => res.json())
       .then((data) => {
         this.movies = data;
