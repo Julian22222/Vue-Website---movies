@@ -1,68 +1,3 @@
-<!-- <template>
-  <div id="app">
-    <div class="post">
-      <h1>Best Movies</h1>
-      <hr />
-
-      <h4>Login / Registration</h4>
-      <input type="text" placeholder="search your movie" />
-      <input type="submit" />
-      <br />
-      <br />
-      <div class="links">
-        <a href="/">Home</a>
-        <a href="/topmovies">Top movies</a>
-      </div>
-      <p>
-        Home / Top movies /////////////// Sorting by -Year / Genres / Ratings /
-        Reviews / Votes
-      </p>
-
-      <MovieList v-bind:movies="movies" />
-    </div>
-  </div>
-</template>
-
-<script>
-import MovieList from "@/components/MovieList.vue";
-export default {
-  name: "App",
-  data() {
-    return {
-      movies: [],
-    };
-  },
-  mounted() {
-    fetch("http://localhost:8081/movies")
-      .then((res) => res.json())
-      .then((data) => {
-        this.movies = data;
-      });
-  },
-  methods: {},
-  components: { MovieList },
-};
-</script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1 {
-  text-align: center;
-}
-
-.links a {
-  margin-right: 20px;
-}
-</style> -->
-
 <script setup>
 import { RouterView } from "vue-router";
 </script>
@@ -71,18 +6,42 @@ import { RouterView } from "vue-router";
   <!-- all content before and after RoterView -will show on every single page -->
   <div class="nav-container">
     <div class="links">
-      <h1>Best Movies.</h1>
+      <h1 class="header">Best <span>Vue</span>Movies.</h1>
+
+      <img
+        src="https://cre.ab.ca/wp-content/uploads/2019/05/pattern-title-background-1920x150.svg"
+        alt="Movie baner"
+        class="banner-img"
+      />
+
+      <div class="loginMMM" v-if="!showUserName">
+        <button @click="hadleLogin()">
+          <img width="25" src="../src/assets/svg-icons/user.png" />
+          Login / Registration
+        </button>
+      </div>
+
+      <div v-if="showUserName">
+        <p>Welcome back {{ showUserName }}</p>
+      </div>
+
+      <div v-if="login">
+        <LoginRegister @close="hadleLogin()" @closeBtn="handleCloseBtn" />
+      </div>
+
+      <div v-if="showUserName" class="logout">
+        <button @click="hadleLogot()">Logout</button>
+      </div>
+
       <div id="nav">
         <router-link to="/">Home</router-link>
         <!--will link the same component
            <router-link :to="{ name:'home'}">Home</router-link> -->
         <router-link to="/top">Top movies</router-link>
         <router-link to="/favorites">Favorite movies</router-link>
-        <router-link to="/enquiries">Enquiries</router-link>
+        <!-- to="{ name: 'enquiries' }" -another way to link components -->
+        <router-link :to="{ name: 'enquiries' }">Enquiries</router-link>
       </div>
-      <!-- <div class="login">
-        <button @click="hadleLogin()">Login / Registration</button>
-      </div> -->
     </div>
     <!-- <br /> -->
 
@@ -97,26 +56,70 @@ import { RouterView } from "vue-router";
 </template>
 
 <script>
+import LoginRegister from "@/components/Login-Register.vue";
+import { computed } from "vue";
+
 export default {
   data() {
     return {
-      // login: false,
+      login: false,
+      userName: "",
+      showUserName: "",
+      showUserId: "",
     };
   },
-  // methods: {
-  //   hadleLogin() {
-  //     this.login = true;
-  //     console.log(this.login);
-  //   },
-  // },
+  // provide is similar to React context in Vue -this data will be available in any component
+  provide() {
+    return {
+      activeUser: computed(() => this.showUserName),
+      activeUserId: computed(() => this.showUserId),
+      // myName: "Santa",
+    };
+  },
+  methods: {
+    hadleLogin() {
+      this.login = !this.login;
+    },
+
+    hadleLogot() {
+      this.showUserName = "";
+    },
+
+    userLoginDetails(user) {
+      this.userName = user;
+    },
+    handleCloseBtn(userDetails, userId) {
+      // reverses the variable - if it is false -it will turn true, and other way round
+      this.login = !this.login;
+      this.showUserName = userDetails;
+      this.showUserId = userId;
+      // console.log(this.showUserName);
+    },
+  },
 };
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  /* box-sizing: border-box; */
+  /* font-family: "Fira Sans", sans-serif; */
+}
+
 body {
   background-color: #33323a;
   /* background-color: #abced8; */
   color: beige;
+}
+
+.banner-img {
+  display: block;
+  width: 100%;
+  /* put picture on backgroun position */
+  object-fit: cover;
+  position: relative;
+  z-index: 0;
 }
 
 #nav {
@@ -134,14 +137,50 @@ body {
   padding: 10px;
 }
 
+.loginMMM button {
+  border: none;
+  background: none;
+  color: beige;
+  font-size: 16px;
+  font-weight: bold;
+  float: right;
+  margin-top: 15px;
+  margin-right: 50px;
+  /* margin-top: -30px; */
+  cursor: pointer;
+}
+
 /* .nav-container {
-  display: flex; 
+  display: flex;
   justify-content: flex-end;
 } */
 
 .login {
-  margin-top: -60px;
+  margin-top: -40px;
   margin-right: 50px;
+}
+
+.logout button {
+  border: none;
+  background: none;
+  color: beige;
+  font-size: 16px;
+  font-weight: bold;
+  float: right;
+  margin-top: 15px;
+  margin-right: 50px;
+  /* margin-top: -50px; */
+  cursor: pointer;
+}
+
+.header {
+  background-color: #2c3d4e;
+  padding: 10px 16px;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 span {
+  color: #42b883;
 }
 
 /* active nav bar color */

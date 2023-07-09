@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="comment_container">
     <ul>
       <li v-for="element in commentList" :key="element.name">
         Name: {{ element.name }}.
@@ -133,5 +133,8 @@ input[type="checkbox"] {
   margin: 0 10px 0 0;
   position: relative;
   top: 2px;
+}
+.comment_container {
+  margin-top: 10px;
 }
 </style>

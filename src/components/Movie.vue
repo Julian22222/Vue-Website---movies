@@ -1,5 +1,5 @@
 <template>
-  <li v-for="movie in movies" :key="movie._id">
+  <li v-for="movie in resultSearch" :key="movie._id">
     <!-- name: 'movieCard' - linking component to this router link -->
     <!-- params: { id: movie._id } -adding id to our url route / path / end point -->
     <!-- params: { id: movie._id } - passing id as a key with value movie._id to our router.js -->
@@ -14,12 +14,14 @@
       </div>
     </router-link>
   </li>
+
+  <div v-if="movies.length === 0">Loading....</div>
 </template>
 
 <script>
 export default {
   // props: ["movieList"] - unpacking props from App.vue to use them in this component
-  props: ["movies"],
+  props: ["movies", "resultSearch"],
   components: {
     // TodoItem,
   },
@@ -41,8 +43,8 @@ export default {
 /* Add rounded corners to the top left and the top right corner of the image */
 img {
   border-radius: 5px 5px 0 0;
-  width: 280px;
-  height: 450px;
+  width: 290px;
+  height: 440px;
 }
 
 li {
@@ -58,6 +60,18 @@ li {
   border-radius: 5px;
 }
 
+p {
+  /* display: flex;
+  justify-content: flex-end; */
+  background-color: orange;
+  padding: 5px;
+  width: 25px;
+  margin-left: 255px;
+  margin-top: -465px;
+  position: absolute;
+  border-radius: 5px;
+}
+
 /* .container-info {
   display: flex;
   justify-content: space-around;
@@ -66,5 +80,6 @@ li {
 .container h4 {
   text-align: center;
   margin: 0;
+  color: beige;
 }
 </style>

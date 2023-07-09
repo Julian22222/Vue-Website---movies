@@ -13,7 +13,7 @@
               <h4>
                 {{ movie.title }}
               </h4>
-              <p>{{ movie.rating }}</p>
+              <p class="myRating">{{ movie.rating }}</p>
             </div>
           </router-link>
         </li>
@@ -29,30 +29,19 @@ export default {
       movies: [],
     };
   },
-  methods: {
-    topMovies() {
-      this.movies = this.movies.filter((element) => {
-        return element.rating > 9;
-      });
-      //   this.movies.filter((element) => {
-      //     // Number(element.rating);
-      //     Number(element.rating) > 9;
-      //   });
-    },
-  },
-  computed: {
-    // topMovies() {
-    //   this.movies.filter((element) => {
-    //     element.rating > 9;
-    //   });
-    // },
-  },
+  methods: {},
+  computed: {},
   mounted() {
-    // fetch("https://movies-ypff.onrender.com/movies")
-    fetch("http://localhost:8082/movies")
+    fetch("https://movies-ypff.onrender.com/movies")
+      // fetch("http://localhost:3007/movies")
       .then((res) => res.json())
       .then((data) => {
-        this.movies = data;
+        this.movies = data.filter((element) => {
+          return element.rating >= 9;
+        });
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
   },
 };
@@ -88,5 +77,23 @@ ul {
   flex-wrap: wrap;
   display: flex;
   flex-direction: row;
+}
+
+.myRating {
+  /* display: flex;
+  justify-content: flex-end; */
+  background-color: orange;
+  padding: 5px;
+  width: 25px;
+  margin-left: 255px;
+  margin-top: -465px;
+  position: absolute;
+  border-radius: 5px;
+}
+
+.container h4 {
+  text-align: center;
+  margin: 0;
+  color: beige;
 }
 </style>

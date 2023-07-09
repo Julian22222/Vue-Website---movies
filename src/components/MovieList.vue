@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <ul>
-      <Movie v-bind:movies="movies" />
+      <Movie v-bind:movies="movies" v-bind:resultSearch="resultSearch" />
     </ul>
   </div>
 </template>
@@ -9,8 +9,8 @@
 <script>
 import Movie from "@/components/Movie.vue";
 export default {
-  // props: ["movieList"] - unpacking props from App.vue to use them in this component
-  props: ["movies"],
+  // props: ["movies"] - unpacking props from Home.vue to use them in this component
+  props: ["movies", "resultSearch"],
   components: {
     Movie,
   },

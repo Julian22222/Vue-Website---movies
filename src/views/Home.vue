@@ -1,19 +1,41 @@
 <template>
-  <div v-if="login">
+  <!-- <div v-if="login">
     <LoginRegister @close="hadleLogin()" @closeBtn="handleCloseBtn" />
   </div>
+
+  <div v-if="showUserName">
+    <p>Welcome back {{ showUserName }}</p>
+  </div> -->
+
   <div>
-    <div class="login">
+    <!-- <div v-if="!showUserName" class="login">
       <button @click="hadleLogin()">Login / Registration</button>
     </div>
+
+    <div v-if="showUserName" class="login">
+      <button @click="hadleLogot()">Logout</button>
+    </div> -->
+
     <div class="post">
       <br />
       <br />
 
       <div class="sort-search-bar">
-        <button class="genresBtn">Genres</button>
-        <!-- press btn ->open a popup window to choose a genres, than will give you a
-        films with that genre -->
+        <div class="genresBtn">
+          <label>Genres: </label>
+          <select v-model="genre">
+            <option></option>
+            <option value="crime">Crime</option>
+            <option value="drama">Drama</option>
+            <option value="romance">Romance</option>
+            <option value="biography">Biography</option>
+            <option value="mystery">Mystery</option>
+            <option value="adventure">Adventure</option>
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="fantasy">Fantasy</option>
+          </select>
+        </div>
 
         <div>
           <label>Sort By: </label>
@@ -44,15 +66,12 @@
         </div>
       </div>
 
-      <MovieList v-bind:movies="movies" />
+      <MovieList v-bind:movies="movies" v-bind:resultSearch="resultSearch" />
     </div>
   </div>
-  {{ search }}
 </template>
 
 <script>
-// /home/codenitro/VSCode/northocoders/project/vue/vue-movies-website/src/components/MovieList.vue
-
 // import new component in here
 import MovieList from "@/components/MovieList";
 import LoginRegister from "@/components/Login-Register.vue";
@@ -69,16 +88,20 @@ export default {
       login: false,
       sort: "",
       order: "desc",
-      search: "",
+      search: null,
+      genre: "",
+      // showUserName: "",
     };
   },
+
   mounted() {
     fetch("https://movies-ypff.onrender.com/movies")
-      // fetch("http://localhost:8082/movies")
+      // fetch("http://localhost:3007/movies")
       .then((res) => res.json())
       .then((data) => {
         this.movies = data;
-      });
+      })
+      .catch((err) => console.error(err.message));
   },
   updated() {
     ////////////////////////sort by RATING
@@ -158,16 +181,50 @@ export default {
       console.log(this.$refs.search.value);
       //   this.$refs.search.classList.add('active') - add class="active to ref="search"
       // this.search = this.$refs.search.value;
+
+      console.log("Genre", this.genre);
     },
     hadleLogin() {
       this.login = !this.login;
     },
-    handleCloseBtn() {
+    hadleLogot() {
+      this.showUserName = "";
+    },
+    handleCloseBtn(userDetails) {
       // reverses the variable - if it is false -it will turn true, and other way round
       this.login = !this.login;
+      this.showUserName = userDetails;
+      console.log(this.showUserName);
     },
   },
   //   components:{} need to register imported component in this component
+  computed: {
+    resultSearch() {
+      this.sort = "";
+      this.order = "desc";
+
+      if (this.search) {
+        this.genre = "";
+
+        // return this.movies.filter((data) =>
+        //   data.toLowerCase().includes(this.search.value.toLowerCase())
+        // );
+
+        return this.movies.filter((movie) => {
+          return this.search
+            .toLowerCase()
+            .split(" ")
+            .every((v) => movie.title.toLowerCase().includes(v));
+        });
+      } else if (this.genre !== "") {
+        return this.movies.filter((movie) => {
+          return movie.genres.includes(this.genre);
+        });
+      } else {
+        return this.movies;
+      }
+    },
+  },
   components: { MovieList, LoginRegister },
 };
 </script>
@@ -180,6 +237,10 @@ export default {
   /* text-align: center; */
   /* color: #2c3e50; */
   margin-top: 60px;
+}
+
+body {
+  min-height: 100vh;
 }
 
 .login button {
