@@ -80,14 +80,6 @@ export default {
       // array of ids of favorite movies
       const savedFavArr = this.showCorrectUser[0].favorites.flat();
 
-      // const eachSavedFavArr = savedFavArr.forEach((el) => {
-      //   return element;
-      // });
-
-      // let result = allMoviesArr.filter((el) => {
-      //   return el._id.includes(eachSavedFavArr);
-      // });
-
       const result = [];
       savedFavArr.forEach((favMov) => {
         result.push(...this.allMovies.filter((mov) => mov._id == favMov));

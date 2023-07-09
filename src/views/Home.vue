@@ -1,21 +1,5 @@
 <template>
-  <!-- <div v-if="login">
-    <LoginRegister @close="hadleLogin()" @closeBtn="handleCloseBtn" />
-  </div>
-
-  <div v-if="showUserName">
-    <p>Welcome back {{ showUserName }}</p>
-  </div> -->
-
   <div>
-    <!-- <div v-if="!showUserName" class="login">
-      <button @click="hadleLogin()">Login / Registration</button>
-    </div>
-
-    <div v-if="showUserName" class="login">
-      <button @click="hadleLogot()">Logout</button>
-    </div> -->
-
     <div class="post">
       <br />
       <br />
@@ -81,10 +65,7 @@ export default {
   // props: ["login"],
   data() {
     return {
-      movies: [
-        // { id: 1, title: "buy groceries" },
-        // { id: 2, title: "wash car" },
-      ],
+      movies: [],
       login: false,
       sort: "",
       order: "desc",
