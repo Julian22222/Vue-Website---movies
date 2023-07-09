@@ -1,7 +1,7 @@
 <template>
   <div>
-    <p>Loged In User: {{ activeUserId }}</p>
-    {{ activeUser }}
+    <!-- <p>Loged In User: {{ activeUserId }}</p>
+    {{ activeUser }} -->
 
     <div class="title-container">
       <div>
