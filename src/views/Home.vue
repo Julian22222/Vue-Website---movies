@@ -81,13 +81,13 @@ export default {
       .then((res) => res.json())
       .then((data) => {
         this.movies = data;
-        console.log("THISSSSSSSSSSSSSSSSSSSSS");
       })
       .catch((err) => console.error(err.message));
   },
   updated() {
     ////////////////////////sort by RATING
     if (this.sort === "rating" && this.order === "desc") {
+      console.log("inside sort", this.sort, this.order);
       this.movies.sort((a, b) => {
         if (a.rating < b.rating) return 1;
       });
