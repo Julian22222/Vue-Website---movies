@@ -81,6 +81,7 @@ export default {
       .then((res) => res.json())
       .then((data) => {
         this.movies = data;
+        console.log("THISSSSSSSSSSSSSSSSSSSSS");
       })
       .catch((err) => console.error(err.message));
   },
